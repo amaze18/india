@@ -90,7 +90,7 @@ def crawl(url):
 
 def remove_newlines(serie):
     serie = serie.str.replace('\n', ' ')
-    serie = serie.str.replace('\\n', ' ')
+    sere serie.str.replace('\\n', ' ')
     serie = serie.str.replace('  ', ' ')
     serie = serie.str.replace('  ', ' ')
     return serie
@@ -114,20 +114,7 @@ def get_df():
     df['text'] = df.fname + ". " + remove_newlines(df.text)
     return df
 
-SCRAPING_DONE = False
-if not SCRAPING_DONE:
-    crawl(full_url)
-    df = get_df()
-    df.to_csv(RESULTS_DIR + 'processed/scraped.csv')
-    df.head()
-    !zip -r iventure_scrape.zip scraped_files
-else:
-    !unzip iventure_scrape.zip
-
-"""# Create Embeddings
-
 ## Clean
-"""
 
 
 import tiktoken
