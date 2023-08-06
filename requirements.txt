@@ -17,3 +17,4 @@ numpy
 beautifulsoup4 
 html-parser
 regex
+bs4
