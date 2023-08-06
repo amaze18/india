@@ -211,16 +211,6 @@ SECRET_IN_ENV = False
 import os
 SECRET_TOKEN = os.getenv("SECRET_TOKEN")
 
-
-def load_api_key():
-    with open("secret.txt", "r") as f:
-        return f.read()
-
-if SECRET_IN_ENV:
-    SECRET_TOKEN = os.getenv("SECRET_TOKEN")
-else:
-    SECRET_TOKEN = load_api_key()
-
 openai.api_key = SECRET_TOKEN
 
 # Note that you may run into rate limit issues depending on how many files you try to embed
