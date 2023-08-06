@@ -18,3 +18,4 @@ pandas
 numpy
 html-parser
 regex
+tiktoken
