@@ -210,7 +210,7 @@ SECRET_IN_ENV = False
 
 import os
 SECRET_TOKEN ='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'
-
+SECRET_TOKEN='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'
 #os.getenv("SECRET_TOKEN")
 
 openai.api_key = SECRET_TOKEN
