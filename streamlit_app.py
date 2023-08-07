@@ -45,7 +45,7 @@ def generate_response(prompt_input, email, passwd):
     #cookies = sign.login()
     # Create ChatBot                        
     #chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
-    st.write(answer_question(prompt_input))
+    #st.write(answer_question(prompt_input))
     return answer_question(prompt_input)
 
 # User-provided prompt
