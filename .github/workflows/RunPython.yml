@@ -2,5 +2,3 @@
     env:
       client_secret: ${{ secrets.SECRET_KEY }}
     run: python3 streamlit_app.py
-
-
