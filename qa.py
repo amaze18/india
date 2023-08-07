@@ -244,7 +244,7 @@ def create_context(
     size="ada"
     # Get the embeddings for the question
     # print("question::",question)
-    st.write(question)
+    #st.write(question)
     q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
 
     # Get the distances from the embeddings
