@@ -209,9 +209,6 @@ load_dotenv()
 SECRET_IN_ENV = True
 
 import os
-SECRET_TOKEN ='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'
-print(SECRET_TOKEN)
-#SECRET_TOKEN='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'
 SECRET_TOKEN=os.getenv("SECRET_TOKEN")
 print(SECRET_TOKEN) 
 openai.api_key = SECRET_TOKEN
