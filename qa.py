@@ -301,14 +301,25 @@ def answer_question(
         # Create a completions using the questin and context
         response = openai.Completion.create(
             prompt=f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
-            temperature=0.05,
+            temperature=0.08,
             max_tokens=max_tokens,
-            top_p=0.8,
+            top_p=0.75,
             frequency_penalty=0,
             presence_penalty=0,
             stop=stop_sequence,
             model=model,
         )
+        ans= response["choices"][0]["text"].strip()
+        question0=question
+        if (ans=='I don\'t know.' or ans=='I don\'t know' ):
+           question=question+ " ISB DLabs"
+           ans=answer_question(df, question=question)
+           if (ans=='I don\'t know.'  or ans=='I don\'t know' ):
+             question=question0+ " ISB"
+             ans=answer_question(df, question=question)
+             if (ans=='I don\'t know.'  or ans=='I don\'t know' ):
+               question=question0+ " I-Venture @ ISB"
+               ans=answer_question(df, question=question)
         return response["choices"][0]["text"].strip()
     except Exception as e:
         print(e)
