@@ -269,19 +269,21 @@ def create_context(
     return "\n\n###\n\n".join(returns)
 
 def answer_question(
-    df,
+    
     question,
+   
+):
+    
+ 
+    """
+    Answer a question based on the most similar context from the dataframe texts
+    """
     model="text-davinci-003",
-    #="Am I allowed to publish model outputs to Twitter, without a human review?"
     max_len=1800,
     size="ada",
     debug=False,
     max_tokens=150,
     stop_sequence=None
-):
-    """
-    Answer a question based on the most similar context from the dataframe texts
-    """
     context = create_context(
         question,
         df,
