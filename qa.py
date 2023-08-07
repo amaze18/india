@@ -234,12 +234,13 @@ df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
 
 
 def create_context(
-    question, df, max_len=1800, size="ada"
+    question, df 
 ):
     """
     Create a context for a question by finding the most similar context from the dataframe
     """
-
+    max_len=1800
+    size="ada"
     # Get the embeddings for the question
     # print("question::",question)
     q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
@@ -269,8 +270,9 @@ def create_context(
 
 def answer_question(
     df,
+    question,
     model="text-davinci-003",
-    question, #="Am I allowed to publish model outputs to Twitter, without a human review?",
+    #="Am I allowed to publish model outputs to Twitter, without a human review?"
     max_len=1800,
     size="ada",
     debug=False,
