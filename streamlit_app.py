@@ -23,7 +23,7 @@ st.write("ISB Dlabs Chat Bot")
 with st.sidebar:
     st.title('🤗💬 ISB Dlabs Chat Bot')
     #if ('EMAIL' in st.secrets) and ('PASS' in st.secrets):
-    st.success('HuggingFace Login credentials already provided!', icon='✅')
+    st.success('Access to this AI Powered Chatbot provided by Anupam!', icon='✅')
     hf_email = 'anupam_purwar2019@pgp.isb.edu'
     hf_pass = 'PASS'
    
@@ -31,7 +31,7 @@ with st.sidebar:
     
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "How may I help you?"}]
+    st.session_state.messages = [{"role": "assistant", "content": "Ask anything about DLabs @ISB ?"}]
 
 # Display chat messages
 for message in st.session_state.messages:
