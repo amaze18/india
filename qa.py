@@ -229,7 +229,7 @@ from ast import literal_eval
 #df = pd.read_csv('processed/embeddings.csv', index_col=0)
 #st.write(df.head())
 #st.write("question::",question)
-st.write(question)
+
 df = pd.read_csv('embeddings.csv', index_col=0)
 df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
 
@@ -244,6 +244,7 @@ def create_context(
     size="ada"
     # Get the embeddings for the question
     # print("question::",question)
+    st.write(question)
     q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
 
     # Get the distances from the embeddings
