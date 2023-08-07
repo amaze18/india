@@ -21,7 +21,7 @@ import os
 
 RESULTS_DIR = "scraped_files/"
 os.makedirs(RESULTS_DIR, exist_ok=True)
-
+import streamlit as st
 import requests
 import re
 import urllib.request
