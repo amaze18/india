@@ -1,4 +1,13 @@
-- name: Run tests
-    env:
-      client_secret: ${{ secrets.SECRET_KEY }}
-    run: python3 streamlit_app.py
+name: openai_access
+on: [pull_request, push] 
+
+env:
+    ## Sets environment variable
+  SECRET_TOKEN: ${{secrets.SECRET_KEY}}    
+
+jobs:
+  job1:
+    runs-on: self-hosted 
+    steps:
+      - name: step 1
+        run: echo "The API key is:${{env.SECRET_TOKEN}}"
