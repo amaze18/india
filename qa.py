@@ -284,7 +284,7 @@ def answer_question(
     max_len=1800
     size="ada"
     debug=False
-    max_tokens=150
+    max_tokens=250
     stop_sequence=None
     context = create_context(
         question,
@@ -301,9 +301,9 @@ def answer_question(
         # Create a completions using the questin and context
         response = openai.Completion.create(
             prompt=f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
-            temperature=0,
+            temperature=0.05,
             max_tokens=max_tokens,
-            top_p=1,
+            top_p=2,
             frequency_penalty=0,
             presence_penalty=0,
             stop=stop_sequence,
