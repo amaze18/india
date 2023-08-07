@@ -280,11 +280,11 @@ def answer_question(
     """
     Answer a question based on the most similar context from the dataframe texts
     """
-    model="text-davinci-003",
-    max_len=1800,
-    size="ada",
-    debug=False,
-    max_tokens=150,
+    model="text-davinci-003"
+    max_len=1800
+    size="ada"
+    debug=False
+    max_tokens=150
     stop_sequence=None
     context = create_context(
         question,
