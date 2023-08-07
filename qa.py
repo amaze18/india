@@ -219,7 +219,7 @@ openai.api_key = SECRET_TOKEN
 
 df['embeddings'] = df.text.apply(lambda x: openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding'])
 df.to_csv('processed/embeddings.csv')
-df.head()
+print(df.head())
 
 """# QnA"""
 
@@ -237,6 +237,7 @@ def create_context(
     """
 
     # Get the embeddings for the question
+    print("question::",question)
     q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
 
     # Get the distances from the embeddings
