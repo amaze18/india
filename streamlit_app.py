@@ -20,7 +20,7 @@ In the meantime, below is an example of what you can do with just a few lines of
 print("ISB Dlabs Chat Bot") 
 
 import os
-SECRET_TOKEN=os.environ["client_secret"]
+SECRET_TOKEN=os.environ["SECRET_TOKEN"]
 st.write("secret_token::",SECRET_TOKEN) 
 openai.api_key = SECRET_TOKEN
 
