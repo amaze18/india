@@ -17,7 +17,7 @@ openai.api_key = SECRET_TOKEN
 
 
 # App title
-st.set_page_config(page_title="🤗💬 ISB Dlabs Chat Bot")
+#st.set_page_config(page_title="🤗💬 ISB Dlabs Chat Bot")
 st.write("ISB Dlabs Chat Bot")
 # Hugging Face Credentials
 with st.sidebar:
