@@ -220,16 +220,16 @@ openai.api_key = SECRET_TOKEN
 df['embeddings'] = df.text.apply(lambda x: openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding'])
 df.to_csv('processed/embeddings.csv')
 df.to_csv('embeddings.csv')
-print(df.head())
+#print(df.head())
 
 """# QnA"""
 
 from ast import literal_eval
 
 #df = pd.read_csv('processed/embeddings.csv', index_col=0)
-st.write(df.head())
+#st.write(df.head())
 #st.write("question::",question)
-df = pd.read_csv('embeddings.csv', index_col=0)
+#df = pd.read_csv('embeddings.csv', index_col=0)
 df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
 
 
