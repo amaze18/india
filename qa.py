@@ -228,7 +228,7 @@ from ast import literal_eval
 
 #df = pd.read_csv('processed/embeddings.csv', index_col=0)
 st.write(df.head())
-st.write("question::",question)
+#st.write("question::",question)
 df = pd.read_csv('embeddings.csv', index_col=0)
 df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
 
@@ -241,7 +241,7 @@ def create_context(
     """
 
     # Get the embeddings for the question
-    print("question::",question)
+    # print("question::",question)
     q_embeddings = openai.Embedding.create(input=question, engine='text-embedding-ada-002')['data'][0]['embedding']
 
     # Get the distances from the embeddings
@@ -270,7 +270,7 @@ def create_context(
 def answer_question(
     df,
     model="text-davinci-003",
-    question="Am I allowed to publish model outputs to Twitter, without a human review?",
+    question, #="Am I allowed to publish model outputs to Twitter, without a human review?",
     max_len=1800,
     size="ada",
     debug=False,
@@ -308,7 +308,7 @@ def answer_question(
         print(e)
         return ""
 
-print(answer_question(df, question="What day is it?", debug=False))
+#print(answer_question(df, question="What day is it?", debug=False))
 
-print(answer_question(df, question="What is our newest embeddings model?"))
+#print(answer_question(df, question="What is our newest embeddings model?"))
 
