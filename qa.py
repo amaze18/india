@@ -309,17 +309,7 @@ def answer_question(
             stop=stop_sequence,
             model=model,
         )
-        ans= response["choices"][0]["text"].strip()
-        question0=question
-        if (ans=='I don\'t know.' or ans=='I don\'t know' ):
-           question=question+ " ISB DLabs"
-           ans=answer_question(df, question=question)
-           if (ans=='I don\'t know.'  or ans=='I don\'t know' ):
-             question=question0+ " ISB"
-             ans=answer_question(df, question=question)
-             if (ans=='I don\'t know.'  or ans=='I don\'t know' ):
-               question=question0+ " I-Venture @ ISB"
-               ans=answer_question(df, question=question)
+      
         return response["choices"][0]["text"].strip()
     except Exception as e:
         print(e)
