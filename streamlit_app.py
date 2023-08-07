@@ -20,7 +20,7 @@ print("ISB Dlabs Chat Bot")
 
 import os
 SECRET_TOKEN=os.getenv('SECRET_TOKEN')
-print("secret_token::",SECRET_TOKEN) 
+st.write("secret_token::",SECRET_TOKEN) 
 openai.api_key = SECRET_TOKEN
 
-st.print(openai.api_key)
+st.write(openai.api_key)
