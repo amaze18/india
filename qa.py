@@ -287,8 +287,8 @@ def answer_question(
     context = create_context(
         question,
         df,
-        max_len=max_len,
-        size=size,
+    #    max_len=max_len,
+     #   size=size,
     )
     # If debug, print the raw model response
     if debug:
