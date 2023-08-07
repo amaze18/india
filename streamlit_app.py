@@ -38,6 +38,7 @@ for message in st.session_state.messages:
 # Function for generating LLM response
 def generate_response(prompt_input, email, passwd):
      question0=prompt_input
+     question=prompt_input
      ans = answer_question(prompt_input)
      if (ans=='I don\'t know.' or ans=='I don\'t know' ):
            question=question+ " ISB DLabs"
