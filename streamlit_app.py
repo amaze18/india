@@ -40,8 +40,9 @@ def generate_response(prompt_input, email, passwd):
      question0=prompt_input
      question=prompt_input
      ans = answer_question(prompt_input)
+     st.write(ans)
      if (ans=='I don\'t know.' or ans=='I don\'t know' ):
-           question=question+ " ISB DLabs"
+           question=question0+ " ISB DLabs"
            ans=answer_question(prompt_input)
            if (ans=='I don\'t know.'  or ans=='I don\'t know' ):
              question=question0+ " ISB"
