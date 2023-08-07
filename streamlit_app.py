@@ -40,16 +40,16 @@ def generate_response(prompt_input, email, passwd):
      question0=prompt_input
      question=prompt_input
      ans = answer_question(prompt_input)
-     st.write(ans)
+     # st.write(ans)
      if (ans=='I don\'t know.' or ans=='I don\'t know' ):
            question=question0+ " ISB DLabs"
-           ans=answer_question(prompt_input)
+           ans=answer_question(question)
            if (ans=='I don\'t know.'  or ans=='I don\'t know' ):
              question=question0+ " ISB"
-             ans=answer_question(prompt_input)
+             ans=answer_question(question)
              if (ans=='I don\'t know.'  or ans=='I don\'t know' ):
                question=question0+ " I-Venture @ ISB"
-               ans=answer_question(prompt_input)
+               ans=answer_question(question)
      return ans
 
 # User-provided prompt
