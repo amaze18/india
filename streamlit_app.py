@@ -24,8 +24,8 @@ with st.sidebar:
     st.title('🤗💬 ISB Dlabs Chat Bot')
     #if ('EMAIL' in st.secrets) and ('PASS' in st.secrets):
     st.success('HuggingFace Login credentials already provided!', icon='✅')
-        hf_email = 'anupam_purwar2019@pgp.isb.edu
-        hf_pass = 'PASS'
+    hf_email = 'anupam_purwar2019@pgp.isb.edu
+    hf_pass = 'PASS'
    
     st.markdown('📖 This app is hosted by i-venture @ ISB [website](https://i-venture.org/)!')
     
