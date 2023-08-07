@@ -10,28 +10,27 @@ from qa import answer_question
 
 
 import os
-SECRET_TOKEN = os.environ["SECRET_TOKEN"] #{{ secrets.SECRET_KEY }} 
-#st.write("secret_token::",SECRET_TOKEN) 
+SECRET_TOKEN = os.environ["SECRET_TOKEN"] 
 openai.api_key = SECRET_TOKEN
 
 
 
 # App title
-#st.set_page_config(page_title="🤗💬 ISB Dlabs Chat Bot")
+st.set_page_config(page_title="🤗💬 ISB Dlabs Chat Bot")
 st.write("ISB Dlabs Chat Bot")
 # Hugging Face Credentials
 with st.sidebar:
     st.title('🤗💬 ISB Dlabs Chat Bot')
     #if ('EMAIL' in st.secrets) and ('PASS' in st.secrets):
-    st.success('Access to this AI Powered Chatbot provided by Anupam!', icon='✅')
+    st.success('Access to this Gen-AI Powered Chatbot is provided by Anupam!', icon='✅')
     hf_email = 'anupam_purwar2019@pgp.isb.edu'
     hf_pass = 'PASS'
    
-    st.markdown('📖 This app is hosted by i-venture @ ISB [website](https://i-venture.org/)!')
+    st.markdown('📖 This app is hosted by I-venture @ ISB [website](https://i-venture.org/)!')
     
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Ask anything about DLabs @ISB ?"}]
+    st.session_state.messages = [{"role": "assistant", "content": "Ask anything about DLabs@ISB ..."}]
 
 # Display chat messages
 for message in st.session_state.messages:
