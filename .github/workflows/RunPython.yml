@@ -5,4 +5,3 @@ on:
 
 env:
   client_secret: ${{secrets.SECRET_KEY}}
-
