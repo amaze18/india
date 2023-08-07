@@ -218,7 +218,7 @@ openai.api_key = SECRET_TOKEN
 # Please check rate limit guide to learn more on how to handle this: https://platform.openai.com/docs/guides/rate-limits
 
 df['embeddings'] = df.text.apply(lambda x: openai.Embedding.create(input=x, engine='text-embedding-ada-002')['data'][0]['embedding'])
-df.to_csv('processed/embeddings.csv')
+#df.to_csv('processed/embeddings.csv')
 df.to_csv('embeddings.csv')
 #print(df.head())
 
