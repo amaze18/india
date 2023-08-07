@@ -209,8 +209,9 @@ load_dotenv()
 SECRET_IN_ENV = True
 
 import os
-SECRET_TOKEN=os.getenv('SECRET_TOKEN')
-print("secret_token",SECRET_TOKEN) 
+
+
+SECRET_TOKEN = os.environ["SECRET_TOKEN"] #{{ secrets.SECRET_KEY }} 
 openai.api_key = SECRET_TOKEN
 
 # Note that you may run into rate limit issues depending on how many files you try to embed
