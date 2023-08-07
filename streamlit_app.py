@@ -16,16 +16,14 @@ openai.api_key = SECRET_TOKEN
 
 
 # App title
-st.set_page_config(page_title="🤗💬 ISB Dlabs Chat Bot")
+st.set_page_config(page_title="🤗💬 ISB DLabs AI-Chat Bot")
 st.write("ISB Dlabs Chat Bot")
 # Hugging Face Credentials
 with st.sidebar:
     st.title('🤗💬 ISB Dlabs Chat Bot')
-    #if ('EMAIL' in st.secrets) and ('PASS' in st.secrets):
-    st.success('Access to this Gen-AI Powered Chatbot is provided by Anupam!', icon='✅')
+    st.success('Access to this Gen-AI Powered Chatbot is provided by Anupam !!', icon='✅')
     hf_email = 'anupam_purwar2019@pgp.isb.edu'
     hf_pass = 'PASS'
-   
     st.markdown('📖 This app is hosted by I-venture @ ISB [website](https://i-venture.org/)!')
     
 # Store LLM generated responses
@@ -39,12 +37,7 @@ for message in st.session_state.messages:
 
 # Function for generating LLM response
 def generate_response(prompt_input, email, passwd):
-    # Hugging Face Login
-    #sign = Login(email, passwd)
-    #cookies = sign.login()
-    # Create ChatBot                        
-    #chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
-    #st.write(answer_question(prompt_input))
+
     return answer_question(prompt_input)
 
 # User-provided prompt
