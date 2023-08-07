@@ -229,7 +229,8 @@ from ast import literal_eval
 #df = pd.read_csv('processed/embeddings.csv', index_col=0)
 #st.write(df.head())
 #st.write("question::",question)
-#df = pd.read_csv('embeddings.csv', index_col=0)
+st.write(question)
+df = pd.read_csv('embeddings.csv', index_col=0)
 df['embeddings'] = df['embeddings'].apply(literal_eval).apply(np.array)
 
 
