@@ -17,3 +17,10 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 
 print("ISB Dlabs Chat Bot") 
+
+import os
+SECRET_TOKEN=os.getenv('SECRET_TOKEN')
+print("secret_token",SECRET_TOKEN) 
+openai.api_key = SECRET_TOKEN
+
+st.print(openai.api_key)
