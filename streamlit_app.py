@@ -16,19 +16,19 @@ openai.api_key = SECRET_TOKEN
 
 
 # App title
-st.set_page_config(page_title="🤗💬 I-venture @ ISB AI-Chat Bot")
-st.write("I-venture @ ISB Chat Bot")
+st.set_page_config(page_title="🤗💬 I-Venture @ ISB AI-Chat Bot")
+st.write("I-Venture @ ISB Chat Bot")
 # Hugging Face Credentials
 with st.sidebar:
-    st.title('🤗💬I-venture @ ISB Chat Bot')
-    st.success('Access to this Gen-AI Powered Chatbot is provided by Anupam !!', icon='✅')
+    st.title('🤗💬I-Venture @ ISB Chat Bot')
+    st.success('Access to this Gen-AI Powered Chatbot is provided by Anupam [website](https://github.com/amaze18)!!', icon='✅')
     hf_email = 'anupam_purwar2019@pgp.isb.edu'
     hf_pass = 'PASS'
-    st.markdown('📖 This app is hosted by I-venture @ ISB [website](https://i-venture.org/)!')
+    st.markdown('📖 This app is hosted by I-Venture @ ISB [website](https://i-venture.org/)!')
     
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Ask anything about I-venture @ ISB ..."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Ask anything about I-Venture @ ISB ..."}]
 
 # Display chat messages
 for message in st.session_state.messages:
