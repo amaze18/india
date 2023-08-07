@@ -303,7 +303,7 @@ def answer_question(
             prompt=f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
             temperature=0.05,
             max_tokens=max_tokens,
-            top_p=2,
+            top_p=0.8,
             frequency_penalty=0,
             presence_penalty=0,
             stop=stop_sequence,
