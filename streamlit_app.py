@@ -3,7 +3,7 @@ import altair as alt
 import math
 import pandas as pd
 import streamlit as st
-from qa import answer_question
+#from qa import answer_question
 
 """
 # Welcome to Streamlit!
@@ -20,7 +20,7 @@ print("ISB Dlabs Chat Bot")
 
 import os
 SECRET_TOKEN=os.getenv('SECRET_TOKEN')
-print("secret_token",SECRET_TOKEN) 
+print("secret_token::",SECRET_TOKEN) 
 openai.api_key = SECRET_TOKEN
 
 st.print(openai.api_key)
