@@ -296,8 +296,7 @@ def answer_question(
     if debug:
         print("Context:\n" + context)
         print("\n\n")
-    introduction = 'Use the below text to answer the subsequent question. If the answer cannot be found in the articles, 
-    write "I could not find an answer."'
+    introduction = 'Use the below text to answer the subsequent question. If the answer cannot be found in the articles, write "I could not find an answer."'
     question_ai = f"\n\nQuestion: {question}"
     message = introduction
     message = message + context + question_ai
