@@ -7,6 +7,9 @@ import openai
 from qa import answer_question
 #from hugchat import hugchat
 #from hugchat.login import Login
+import os
+
+from PIL import Image
 
 
 import os
@@ -18,6 +21,9 @@ openai.api_key = SECRET_TOKEN
 # App title
 st.set_page_config(page_title="🤗💬 I-Venture @ ISB AI-Chat Bot")
 st.write("I-Venture @ ISB Chat Bot")
+image = Image.open('isbdlabs.jpg')
+st.image(image, caption=None, width=None, use_column_width=None, clamp=False, channels='RGB', output_format='auto')
+#
 # Hugging Face Credentials
 with st.sidebar:
     st.title('🤗💬I-Venture @ ISB Chat Bot')
