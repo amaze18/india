@@ -296,7 +296,8 @@ def answer_question(
     if debug:
         print("Context:\n" + context)
         print("\n\n")
-    introduction = 'Use the below text to answer the subsequent question. If the answer cannot be found in the articles, write "I could not find an answer."'
+    introduction = 'Use the below text to answer the subsequent question. If the answer cannot be found in the articles, 
+    write "I could not find an answer."'
     question_ai = f"\n\nQuestion: {question}"
     message = introduction
     message = message + context + question_ai
@@ -304,26 +305,26 @@ def answer_question(
         {"role": "system","content": "You are iVBot, an AI based chatbot assistant. You are friendly, proactive, factual and helpful, \
         you answer from the context provided"}, {"role": "user", "content": message},
     ]
-    response = openai.ChatCompletion.create(
-     model='gpt-3.5-turbo-16k',
-     messages=messages
+    
+    try:
+        response = openai.ChatCompletion.create(
+         model='gpt-3.5-turbo-16k',
+        messages=messages
         )
       
-    #ans=response # ["choices"][0]["text"].strip()
-    ans=response["choices"][0]["message"]["content"]
-    try:
+        ans=response["choices"][0]["message"]["content"]
         # Create a completions using the questin and context
         
-        response = openai.Completion.create(
-            prompt=f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I don't know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
-            temperature=0.08,
-            max_tokens=max_tokens,
-            top_p=0.75,
-            frequency_penalty=0,
-            presence_penalty=0,
-            stop=stop_sequence,
-            model=model,
-        )
+        #response = openai.Completion.create(
+         #   prompt=f"Answer the question based on the context below, and if the question can't be answered based on the context, say \"I do not know\"\n\nContext: {context}\n\n---\n\nQuestion: {question}\nAnswer:",
+         #   temperature=0.08,
+         #   max_tokens=max_tokens,
+         #   top_p=0.75,
+         #   frequency_penalty=0,
+         #   presence_penalty=0,
+         #   stop=stop_sequence,
+         #   model=model,
+        #)
       
         return ans #response["choices"][0]["text"].strip()
     except Exception as e:
