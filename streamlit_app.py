@@ -47,13 +47,13 @@ def generate_response(prompt_input, email, passwd):
      question=prompt_input
      ans = answer_question(prompt_input)
      # st.write(ans)
-     if (ans=='I don\'t know.' or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans  ):
+     if (ans=='I don\'t know.' or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans  or ' I couldn\'t find'  in ans  ):
            question=question0+ " ISB DLabs"
            ans=answer_question(question)
-           if (ans=='I don\'t know.'  or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans  ):
+           if (ans=='I don\'t know.'  or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans or ' I couldn\'t find'  in ans  ):
              question=question0+ " ISB"
              ans=answer_question(question)
-             if (ans=='I don\'t know.'  or ans=='I don\'t know'  or ans== 'I could not find an answer.' or 'I could not find' in ans  ):
+             if (ans=='I don\'t know.'  or ans=='I don\'t know'  or ans== 'I could not find an answer.' or 'I could not find' in ans or ' I couldn\'t find'  in ans  ):
                question=question0+ " I-Venture @ ISB"
                ans=answer_question(question)
      return ans
