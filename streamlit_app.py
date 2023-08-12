@@ -16,8 +16,6 @@ import os
 SECRET_TOKEN = os.environ["SECRET_TOKEN"] 
 openai.api_key = SECRET_TOKEN
 
-
-
 # App title
 st.set_page_config(page_title="🤗💬 I-Venture @ ISB AI-Chat Bot")
 st.write("I-Venture @ ISB Chat Bot")
@@ -59,6 +57,17 @@ def generate_response(prompt_input, email, passwd):
      return ans
 
 # User-provided prompt
+page_bg_img = '''
+<style>
+body {
+background-image: url("https://csrbox.org/media/Hero-Image.png");
+background-size: cover;
+}
+</style>
+'''
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
