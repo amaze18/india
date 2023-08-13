@@ -120,7 +120,7 @@ def create_db():
     return db
 
 
-def chat_gpt(qa, question):
+def chat_gpt(question):
     db= create_db()
 
     retriever = db.as_retriever(search_type='similarity', search_kwargs={"k": 5} )#do not increase k beyond 3, else
