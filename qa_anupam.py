@@ -15,40 +15,6 @@ Original file is located at
 from langchain.llms import OpenAI
 from langchain import PromptTemplate, LLMChain
 
-template = """Question: {question}
-
-
-prompt = PromptTemplate(template=template, input_variables=["question"])
-
-#llm = OpenAI()
-
-llm = OpenAI(openai_api_key=api_key) #, openai_organization="YOUR_ORGANIZATION_ID")
-
-
-llm_chain = LLMChain(prompt=prompt, llm=llm)
-
-question = "What NFL team won the Super Bowl in the year Justin Beiber was born?"
-
-llm_chain.run(question)
-
-from google.colab import drive
-drive.mount('/content/drive')
-
-"""**In case you are running this notebook, setup source_documents folder in Google Drive, skip this step if you are running it in your local, but make sure to have setup source_documents folder in workspace**"""
-
-# Commented out IPython magic to ensure Python compatibility.
-from google.colab import drive
-#drive.mount('/content/drive', force_remount=True)
-#%cd /content/drive/MyDrive
-# %pwd
-# %ls
-#%mkdir source_documents
-# %cd /content/drive/MyDrive/anupam
-# %pwd
-# %ls
-
-"""# **Langchain libraries imported**"""
-
 import gradio as gr
 import random
 import time
@@ -111,16 +77,19 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 hf= OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key=api_key)
 
 """# **All the documents are fetched and stored in vector database here ::**"""
+template = """Question: {question}
+prompt = PromptTemplate(template=template, input_variables=["question"])
+
 
 documents = []
-a=glob.glob("*.txt")
+a=glob.glob("source_documents/*.txt")
 for i in range(len(a)):
         print(a[i])
         documents.extend(TextLoader(a[i]).load())
         print(TextLoader(a[i]).load())
 
-a=glob.glob("*.html")
-print(a)
+a=glob.glob("source_documents/*.html")
+
 try:
   for i in range(len(a)):
         print(i)
@@ -129,64 +98,56 @@ try:
 except:
   print(i)
 
-a=glob.glob("*.pdf")
-print(a)
+a=glob.glob("source_documents/*.pdf")
 for i in range(len(a)):
 
         documents.extend(PDFMinerLoader(a[i]).load())
 
-#a=glob.glob("source_documents/*.csv")
-a=glob.glob("scraped.csv")
-print(a)
+a=glob.glob("source_documents/*.csv")
 for i in range(len(a)):
 
         documents.extend(CSVLoader(a[i]).load())
 
-#a=glob.glob("source_documents/*.ppt")
-#for i in range(len(a)):
+a=glob.glob("source_documents/*.ppt")
+for i in range(len(a)):
 
- #       documents.extend(UnstructuredPowerPointLoader(a[i]).load())
+        documents.extend(UnstructuredPowerPointLoader(a[i]).load())
 
-#a=glob.glob("source_documents/*.pptx")
-#for i in range(len(a)):
+a=glob.glob("source_documents/*.pptx")
+for i in range(len(a)):
 
- #       documents.extend(UnstructuredPowerPointLoader(a[i]).load())
+        documents.extend(UnstructuredPowerPointLoader(a[i]).load())
 
 
-#a=glob.glob("source_documents/*.docx")
-#for i in range(len(a)):
+a=glob.glob("source_documents/*.docx")
+for i in range(len(a)):
 
- #       documents.extend(UnstructuredWordDocumentLoader(a[i]).load())
+        documents.extend(UnstructuredWordDocumentLoader(a[i]).load())
 
-#a=glob.glob("source_documents/*.ppt")
-#for i in range(len(a)):
+a=glob.glob("source_documents/*.ppt")
+for i in range(len(a)):
 
- #       documents.extend(UnstructuredPowerPointLoader(a[i]).load())
+        documents.extend(UnstructuredPowerPointLoader(a[i]).load())
 
-print(documents)
+#print(documents)
 
 chunk_size = 1024
 chunk_size = 512
 text_splitter = CharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
 texts_isb = text_splitter.split_documents(documents)
-print(len(texts_isb))
-print(texts_isb)
+
 db = FAISS.from_documents(texts_isb, hf)
 
-print(db)
 
 query = "Who is Anupam"
 docs = db.similarity_search(query)
-print(docs)
 docs_and_scores = db.similarity_search_with_score(query)
 docs_and_scores[0]
-print(docs_and_scores[0])
 db.save_local("faiss_index_anupam")
 
 """# **LLM object creation starts here ::**"""
 
 docs_and_scores = db.similarity_search_with_score(query)
-print(docs_and_scores)
 
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
@@ -210,7 +171,6 @@ memory = ConversationBufferMemory(memory_key="chat_history", return_messages=Tru
   #  retriever,
    # memory=memory
 #)
-query="WHo is Anupam"
 answer = qa(query)
 
 # Modify the tone using OpenAI's ChatCompletion
@@ -221,14 +181,11 @@ response = openai.ChatCompletion.create(
         {"role": "user", "content": f"{answer}"}
     ]
 )
-print(response)
 
 def chat_gpt(qa, question):
-    #args = parse_arguments()
+   
     query = question
     res = qa(query)
-    #print(res)
-    #res =res["chat_history"][1].content#["AIMessage"]#["content"].strip()
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
@@ -237,262 +194,17 @@ def chat_gpt(qa, question):
     ])
     #print(res)
     answer= response["choices"][0]["message"]["content"]
-    #answer, docs = res['result'], res['source_documents']
-    #print("answer::",answer)
     docs = db.similarity_search(query)
 
 
     doc_list=[]
     for document in docs:
-            #print(" Sources \n> " + document.metadata["source"] + ":")
-            #print(document.page_content)
+            
             metadata=document.metadata["source"]
             doc_list.append(document)
 
     return answer #, docs[0],metadata
-q= "tell about anupam purwar in 5 points"
-q="what awards Anupam won"
-q= "how many  papers Anupam Purwar wrote and how many citations he has, give answer in bullet points"
-q="which papers ANupam have written"
-q="how many papers ANupam have written"
-q= "how many  papers Anupam wrote"
-q="Where did Anupam study"
-q="write 4 points about Anupam Purwar"
-answer=chat_gpt(qa, q)
-print(answer)
-
-import time
-import pandas as pd
-questions=["Where all ANupam purwar worked","who is Anupam Purwar?, give answer in bullet points",
-           "how many  papers Anupam Purwar wrote, give answer in bullet points",
-           " what awards Anupam won",
-           "tell about anupam purwar in 5 points"
-,"what awards Anupam won"
-,"how many  papers Anupam Purwar wrote and how many citations he has, give answer in bullet points"
-,"which papers ANupam have written"
-,"how many papers ANupam have written"
-,"how many  papers Anupam wrote"
-,"Where did Anupam study"
-,"write 10 points about Anupam Purwar"
-
-           ]
-i=0
-
-
-ans_metrics=[]
-for question in questions:
-  print("Question #: ", i, question)
-  i+=1
-  start=time.time()
-  #ans=qa(question)
-  ans=chat_gpt(qa, question)
-
-  ans_metrics.append([question, ans,time.time()-start])
-  print(ans)
-  print("\n")
-
-pd.DataFrame(ans_metrics, columns=["Question","Answer","Run Time (s)"]).to_csv("anupam_genAI_chatbot_OpenAI.csv")
-
-type(doc)
-print(doc)
-docs = [Document(page_content=doc.page_content)]
-docs
-
-"""# **Chatbot code with web UI starts here:**"""
-
-from langchain.chains.summarize import load_summarize_chain
-summary_chain = load_summarize_chain(llm=llm, chain_type='stuff',
-                                      verbose=True # Set verbose=True if you want to see the prompts being used
-                                    )
-summary = summary_chain.run(docs)
-#summary
-
-num_tokens_first_doc = llm.get_num_tokens(doc.page_content)
-
-print (f"Now we have documents and the first one has {num_tokens_first_doc} tokens")
-
-from langchain import PromptTemplate
-
-map_prompt = """
-Write a concise summary of the following:
-"{text}"
-CONCISE SUMMARY:
-"""
-map_prompt_template = PromptTemplate(template=map_prompt, input_variables=["text"])
-
-
-combine_prompt = """
-Write a concise summary of the following text delimited by triple backquotes.
-Return your response in bullet points which covers the key points of the text.
-```{text}```
-BULLET POINT SUMMARY:
-"""
-
-
-combine_prompt = """
-Write a concise summary of the following text .
-Return your response in bullet points which covers the key points of the text.
-"{text}"
-BULLET POINT SUMMARY:
-"""
-
-combine_prompt_template = PromptTemplate(template=combine_prompt, input_variables=["text"])
-
-summary_chain = load_summarize_chain(llm=llm,
-                                     chain_type='map_reduce',
-                                     map_prompt=map_prompt_template,
-                                     combine_prompt=combine_prompt_template,
-#                                      verbose=True
-                                    )
-
-
-output = summary_chain.run(docs)
-print(output)
-
-def parse_arguments():
-    parser = argparse.ArgumentParser(description='privateGPT: Ask questions to your documents without an internet connection, '
-                                                 'using the power of LLMs.')
-    parser.add_argument("--hide-source", "-S", action='store_true',
-                        help='Use this flag to disable printing of source documents used for answers.')
-
-    parser.add_argument("--mute-stream", "-M",
-                        action='store_true',
-                        help='Use this flag to disable the streaming StdOut callback for LLMs.')
-
-    return parser.parse_args()
-
-def chat_gpt(qa, question):
-    #args = parse_arguments()
-    query = question
-    res = qa(query)
-    answer, docs = res['result'], res['source_documents']
-
-
-    # Print the relevant sources used#ggml-gpt4all-j-v1.3-groovy.bin for the answer
-    for document in docs:
-            print(" Sources \n> " + document.metadata["source"] + ":")
-            #print(document.page_content)
-            metadata=document.metadata["source"]
-            doc=document.page_content
-
-    return answer, doc,metadata
 
 
 
-with gr.Blocks() as mychatbot:  # Blocks is a low-level API that allows
-                                # you to create custom web applications
-    chatbot = gr.Chatbot(label="Chat with Professor Bhagwan: Ask questions to your documents without an internet connection")      # displays a chatbot
-    question = gr.Textbox(label="Question")     # for user to ask a question
-    clear = gr.Button("Clear Conversation History")  # Clear button
-    kill = gr.Button("Stop Current Search")  # Clear button
-
-    # function to clear the conversation
-    def clear_messages():
-        global messages
-        messages = []    # reset the messages list
-
-
-    def kill_search():
-        print("killing")
-        kill =1
-        exit()    # reset the messages list
-
-    def chat(message, chat_history, kill):
-        global messages
-        print("chat function launched...")
-        print(message)
-        messages.append({"role": "user", "content": message})
-        response, doc, metadata = chat_gpt(qa, message)
-
-
-        print("private gpt response recieved...")
-        print(response)
-        print("content....")
-        content = response + "\n" + "Sources:"+ "\n >" + metadata+ ":" +"\n"  +"Content: "+"\n"  +doc
-        print(content)
-        #['choices'][0]['message']['content']
-
-
-        chat_history.append((message, content))
-        return "", chat_history
-
-    # wire up the event handler for Submit button (when user press Enter)
-    question.submit(fn = chat,
-                    inputs = [question, chatbot],
-                    outputs = [question, chatbot])
-
-    # wire up the event handler for the Clear Conversation button
-
-    clear.click(fn = clear_messages,
-                inputs = None,
-                outputs = chatbot,
-                queue = False)
-    kill.click(fn = kill_search,
-                inputs = None,
-                outputs = chatbot,
-                queue = False)
-
-mychatbot.launch(share=True, debug=True)
-
-import os
-import requests
-from bs4 import BeautifulSoup
-
-wunder = requests.get("https://i-venture.org/sitemap.xml")
-parcala = BeautifulSoup(wunder.content, "xml")
-
-url_from_xml = []
-
-loc_tags = parcala.find_all('loc')
-
-for loc in loc_tags:
-    url_from_xml.append(loc.get_text())
-
-#print(urls_from_xml)
-urls_from_xml = []
-j=0
-for i in url_from_xml:
-
-    wunder = requests.get(i)
-    parcala = BeautifulSoup(wunder.content, "xml")
-
-
-
-    loc_tags = parcala.find_all('loc')
-
-
-    for loc in loc_tags:
-
-        urls_from_xml.append(loc.get_text())
-        last3=loc.get_text()
-        last3= last3[-3:]
-        #print(last3)
-        if( last3!='png' and last3!='jpg'  and last3!='svg'  ):
-          cmd = 'wget -O i-venture_'+ str(j)+'.html '+ loc.get_text()
-          print(j,": " ,cmd)
-          j+=1
-          os.system(cmd)
-
-#print(urls_from_xml)
-
-# Commented out IPython magic to ensure Python compatibility.
-# %pwd
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
-# %cd /content/drive/MyDrive
-# %pwd
-
-# Commented out IPython magic to ensure Python compatibility.
-# %cd source_documents
-# %pwd
-
-# Commented out IPython magic to ensure Python compatibility.
-# %ls
-
-# Commented out IPython magic to ensure Python compatibility.
-# %rm -r i-venture*.html
-
-# Commented out IPython magic to ensure Python compatibility.
-# %cd ..
-# %pwd
 
