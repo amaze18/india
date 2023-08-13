@@ -16,17 +16,17 @@ openai.api_key = SECRET_TOKEN
 # App title
 st.set_page_config(page_title="🤗💬 Anupam @ Everywhere Chat Bot")
 st.header('🤗💬Anupam @ Everywhere Chat Bot')
-st.subheader('🤗💬Ask anything about Anupam Purwar')
+st.subsubheader('🤗💬Ask anything about Anupam Purwar')
 
 #
 # Hugging Face Credentials
 with st.sidebar:
     st.title('🤗💬Anupam @ Everywhere Chat Bot')
-    st.success('Access to this Gen-AI Powered Chatbot is provided by Anupam [website](https://github.com/amaze18)!!', icon='✅')
+    st.success('Developed by [Anupam](https://www.linkedin.com/in/anupamisb/)!!', icon='✅')
     hf_email = 'anupam_purwar2019@pgp.isb.edu'
     hf_pass = 'PASS'
-    st.markdown('📖 This app is hosted by [Anupam](https://i-venture.org/)!')
-    st.write("I-Venture @ ISB Chat Bot")
+    st.markdown('📖 This app is hosted by [Anupam](https://www.linkedin.com/in/anupamisb/)!')
+    st.write("Anupam @ Everywhere Chat Bot")
     image = Image.open('anupam_pic.jpg')
     st.image(image, caption=None, width=None, use_column_width=None, clamp=False, channels='RGB', output_format='auto')
 
