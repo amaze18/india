@@ -16,7 +16,7 @@ openai.api_key = SECRET_TOKEN
 # App title
 st.set_page_config(page_title="🤗💬 Anupam @ Everywhere Chat Bot")
 st.header('🤗💬Anupam @ Everywhere Chat Bot')
-st.subsubheader('🤗💬Ask anything about Anupam Purwar')
+#st.subsubheader('🤗💬Ask anything about Anupam Purwar')
 
 #
 # Hugging Face Credentials
