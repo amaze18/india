@@ -17,22 +17,22 @@ SECRET_TOKEN = os.environ["SECRET_TOKEN"]
 openai.api_key = SECRET_TOKEN
 
 # App title
-st.set_page_config(page_title="🤗💬 I-Venture @ ISB AI-Chat Bot")
+st.set_page_config(page_title="🤗💬 Anupam @ Everywhere Chat Bot")
 st.write("I-Venture @ ISB Chat Bot")
 image = Image.open('isbdlabs.jpg')
 st.image(image, caption=None, width=None, use_column_width=None, clamp=False, channels='RGB', output_format='auto')
 #
 # Hugging Face Credentials
 with st.sidebar:
-    st.title('🤗💬I-Venture @ ISB Chat Bot')
+    st.title('🤗💬Anupam @ Everywhere Chat Bot')
     st.success('Access to this Gen-AI Powered Chatbot is provided by Anupam [website](https://github.com/amaze18)!!', icon='✅')
     hf_email = 'anupam_purwar2019@pgp.isb.edu'
     hf_pass = 'PASS'
-    st.markdown('📖 This app is hosted by I-Venture @ ISB [website](https://i-venture.org/)!')
+    st.markdown('📖 This app is hosted by[Anupam](https://i-venture.org/)!')
     
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Ask anything about I-Venture @ ISB ..."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Ask anything about Anupam ..."}]
 
 # Display chat messages
 for message in st.session_state.messages:
@@ -43,16 +43,16 @@ for message in st.session_state.messages:
 def generate_response(prompt_input, email, passwd):
      question0=prompt_input
      question=prompt_input
-     ans = answer_question(prompt_input)
+     ans = chat_gpt(prompt_input)
      # st.write(ans)
      if (ans=='I don\'t know.' or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans  or ' I couldn\'t find'  in ans  ):
-           question=question0+ " ISB DLabs"
+           question=question0+ " Anupam Purwar"
            ans=answer_question(question)
            if (ans=='I don\'t know.'  or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans or ' I couldn\'t find'  in ans  ):
-             question=question0+ " ISB"
+             question=question0+ " Anupam"
              ans=answer_question(question)
              if (ans=='I don\'t know.'  or ans=='I don\'t know'  or ans== 'I could not find an answer.' or 'I could not find' in ans or ' I couldn\'t find'  in ans  ):
-               question=question0+ " I-Venture @ ISB"
+               question=question0+ " Anupam Purwar ISB"
                ans=answer_question(question)
      return ans
 
