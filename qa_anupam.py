@@ -14,7 +14,6 @@ Original file is located at
 
 from langchain.llms import OpenAI
 from langchain import PromptTemplate, LLMChain
-
 import gradio as gr
 import random
 import time
@@ -64,15 +63,17 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.vectorstores import Chroma
 from langchain.llms import GPT4All, LlamaCpp
-
-messages = []
-kill = 0
-
 """# **Embeddings model object to vectorize documents **"""
 
 global qa
+import os
 
-#hf = HuggingFaceEmbeddings()
+
+SECRET_TOKEN = os.environ["SECRET_TOKEN"] 
+openai.api_key = SECRET_TOKEN
+messages = []
+kill = 0
+
 from langchain.embeddings.openai import OpenAIEmbeddings
 hf= OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key=api_key)
 
@@ -129,7 +130,6 @@ for i in range(len(a)):
 
         documents.extend(UnstructuredPowerPointLoader(a[i]).load())
 
-#print(documents)
 
 chunk_size = 1024
 chunk_size = 512
@@ -137,17 +137,7 @@ text_splitter = CharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk
 texts_isb = text_splitter.split_documents(documents)
 
 db = FAISS.from_documents(texts_isb, hf)
-
-
-query = "Who is Anupam"
-docs = db.similarity_search(query)
-docs_and_scores = db.similarity_search_with_score(query)
-docs_and_scores[0]
 db.save_local("faiss_index_anupam")
-
-"""# **LLM object creation starts here ::**"""
-
-docs_and_scores = db.similarity_search_with_score(query)
 
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
@@ -157,33 +147,26 @@ chunk_size = 2048
 chunk_size = 1024
 chunk_size = 512
 
-retriever = db.as_retriever(search_type='similarity', search_kwargs={"k": 5} )
-#do not increase k beyond 3, else
-callbacks = []
-openai.api_key = api_key
-llm = OpenAI(model='text-davinci-003',temperature=0, openai_api_key=api_key)
-qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents=True)
-
-memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-
-#qa = ConversationalRetrievalChain.from_llm(
- #   OpenAI(model='text-davinci-003',temperature=0,openai_api_key=api_key ),
-  #  retriever,
-   # memory=memory
-#)
-answer = qa(query)
-
-# Modify the tone using OpenAI's ChatCompletion
-response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": "You are a helpful and friendly chatbot who converts text to a very friendly tone."},
-        {"role": "user", "content": f"{answer}"}
-    ]
-)
-
 def chat_gpt(qa, question):
-   
+
+    retriever = db.as_retriever(search_type='similarity', search_kwargs={"k": 5} )#do not increase k beyond 3, else
+    openai.api_key = api_key
+    llm = OpenAI(model='text-davinci-003',temperature=0, openai_api_key=api_key)
+    qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents=True)
+    
+    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+
+    answer = qa(query)
+    
+    # Modify the tone using OpenAI's ChatCompletion
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful and friendly chatbot who converts text to a very friendly tone."},
+            {"role": "user", "content": f"{answer}"}
+        ]
+    )
+
     query = question
     res = qa(query)
     response = openai.ChatCompletion.create(
@@ -192,18 +175,8 @@ def chat_gpt(qa, question):
         {"role": "system", "content": "You are a helpful and friendly chatbot who answers based on contect provided in very friendly tone."},
         {"role": "user", "content": f"{res}"}
     ])
-    #print(res)
     answer= response["choices"][0]["message"]["content"]
-    docs = db.similarity_search(query)
-
-
-    doc_list=[]
-    for document in docs:
-            
-            metadata=document.metadata["source"]
-            doc_list.append(document)
-
-    return answer #, docs[0],metadata
+    return answer
 
 
 
