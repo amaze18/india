@@ -21,3 +21,4 @@ html-parser
 regex
 tiktoken
 openai[embeddings]
+langchain
