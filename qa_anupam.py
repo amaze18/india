@@ -34,7 +34,7 @@ from langchain.document_loaders import (
 import os
 import glob
 import argparse
-
+import openai
 from time import sleep
 chunk_size = 512 #512
 chunk_overlap = 50
