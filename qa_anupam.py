@@ -11,29 +11,12 @@ Original file is located at
 
 #Make following parameter 1 if you have restarted using this colab notebook
 #after a restart of kernel or re-logging into gmail account
-running_after_kernel_restart=1
-if(running_after_kernel_restart==1):
-  ! pip install gradio
-  ! pip install langchain
-  ! pip install dotenv
-  ! pip install
-  ! pip install sentence_transformers
-  ! pip install chromadb
-  ! pip install unstructured
-  ! pip install youtube-transcript-api
-  ! pip install faiss
-  ! pip install faiss-cpu
-  ! pip install openai
-  ! pip install pdfminer.six
-  ! pip install tiktoken
 
 from langchain.llms import OpenAI
 from langchain import PromptTemplate, LLMChain
 
-api_key ='***REMOVED***'
 template = """Question: {question}
 
-Answer: Let's think step by step."""
 
 prompt = PromptTemplate(template=template, input_variables=["question"])
 
