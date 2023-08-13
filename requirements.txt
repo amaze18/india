@@ -3,8 +3,7 @@ pandas
 pandasai==0.2.15
 pdfplumber
 pypdf==3.9.0
-streamlit==1.22.0
-streamlit-chat==0.0.2.2
+streamlit
 tiktoken==0.4.0
 hugchat==0.0.8
 beautifulsoup4==4.12.2
