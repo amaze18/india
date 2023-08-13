@@ -1,9 +1,7 @@
 from langchain.llms import OpenAI
 from langchain import PromptTemplate, LLMChain
-import gradio as gr
 import random
 import time
-from dotenv import load_dotenv
 from langchain.chains import RetrievalQA
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
@@ -18,8 +16,6 @@ from langchain.docstore.document import Document
 from langchain import HuggingFacePipeline
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.embeddings import HuggingFaceInstructEmbeddings
-from dotenv import load_dotenv
-from multiprocessing import Pool
 from tqdm import tqdm
 from langchain.vectorstores import FAISS
 from langchain.document_loaders import (
@@ -40,7 +36,6 @@ import glob
 import argparse
 
 from time import sleep
-from multiprocessing import Process
 chunk_size = 512 #512
 chunk_overlap = 50
 from dotenv import load_dotenv
@@ -51,13 +46,12 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.vectorstores import Chroma
 from langchain.llms import GPT4All, LlamaCpp
 global qa
-import os
+
 
 
 SECRET_TOKEN = os.environ["SECRET_TOKEN"] 
 openai.api_key = SECRET_TOKEN
 messages = []
-
 
 
 """# **Embeddings model object to vectorize documents **"""
