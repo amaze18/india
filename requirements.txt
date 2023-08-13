@@ -25,4 +25,3 @@ tiktoken
 langchain==0.0.180
 openai[embeddings]
 faiss-cpu
-faiss
