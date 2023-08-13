@@ -1,5 +1,6 @@
 altair
 pandas
+langchain==0.0.27 
 hugchat==0.0.8
 beautifulsoup4==4.12.2
 openai==0.27.7
@@ -21,4 +22,4 @@ html-parser
 regex
 tiktoken
 openai[embeddings]
-langchain
+
