@@ -1,6 +1,5 @@
 altair
 pandas
-﻿langchain==0.0.180
 pandasai==0.2.15
 pdfplumber
 pypdf==3.9.0
@@ -25,3 +24,4 @@ numpy
 html-parser
 regex
 tiktoken
+langchain==0.0.180
