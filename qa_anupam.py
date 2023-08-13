@@ -60,7 +60,11 @@ messages = []
 """# **Embeddings model object to vectorize documents **"""
 def create_db():
     documents = []
-    hf= OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key=api_key)
+    SECRET_IN_ENV = True
+    SECRET_TOKEN = os.environ["SECRET_TOKEN"] 
+    openai.api_key = SECRET_TOKEN
+    messages = []    
+    hf= OpenAIEmbeddings(model="text-embedding-ada-002", openai_api_key=openai.api_key )
 
     a=glob.glob("source_documents/*.txt")
     for i in range(len(a)):
@@ -122,10 +126,13 @@ def create_db():
 
 def chat_gpt(question):
     db= create_db()
+    SECRET_IN_ENV = True
+    SECRET_TOKEN = os.environ["SECRET_TOKEN"] 
+    openai.api_key = SECRET_TOKEN
 
     retriever = db.as_retriever(search_type='similarity', search_kwargs={"k": 5} )#do not increase k beyond 3, else
     openai.api_key = api_key
-    llm = OpenAI(model='text-davinci-003',temperature=0, openai_api_key=api_key)
+    llm = OpenAI(model='text-davinci-003',temperature=0, openai_api_key=openai.api_key)
     qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents=True)
     
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
