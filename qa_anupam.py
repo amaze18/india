@@ -47,7 +47,10 @@ from langchain.vectorstores import Chroma
 from langchain.llms import GPT4All, LlamaCpp
 global qa
 
+from dotenv import load_dotenv
+load_dotenv()
 
+SECRET_IN_ENV = True
 
 SECRET_TOKEN = os.environ["SECRET_TOKEN"] 
 openai.api_key = SECRET_TOKEN
