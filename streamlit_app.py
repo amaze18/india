@@ -8,19 +8,16 @@ from qa_anupam import chat_gpt
 #from hugchat import hugchat
 #from hugchat.login import Login
 import os
-
 from PIL import Image
-
-
 import os
 SECRET_TOKEN = os.environ["SECRET_TOKEN"] 
 openai.api_key = SECRET_TOKEN
 
 # App title
 st.set_page_config(page_title="🤗💬 Anupam @ Everywhere Chat Bot")
-st.write("I-Venture @ ISB Chat Bot")
-image = Image.open('isbdlabs.jpg')
-st.image(image, caption=None, width=None, use_column_width=None, clamp=False, channels='RGB', output_format='auto')
+st.header('🤗💬Anupam @ Everywhere Chat Bot')
+st.subheader('🤗💬Ask anything about Anupam Purwar')
+
 #
 # Hugging Face Credentials
 with st.sidebar:
@@ -28,7 +25,11 @@ with st.sidebar:
     st.success('Access to this Gen-AI Powered Chatbot is provided by Anupam [website](https://github.com/amaze18)!!', icon='✅')
     hf_email = 'anupam_purwar2019@pgp.isb.edu'
     hf_pass = 'PASS'
-    st.markdown('📖 This app is hosted by[Anupam](https://i-venture.org/)!')
+    st.markdown('📖 This app is hosted by [Anupam](https://i-venture.org/)!')
+    st.write("I-Venture @ ISB Chat Bot")
+    image = Image.open('anupam_pic.jpg')
+    st.image(image, caption=None, width=None, use_column_width=None, clamp=False, channels='RGB', output_format='auto')
+
     
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
