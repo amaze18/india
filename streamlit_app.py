@@ -46,15 +46,18 @@ def generate_response(prompt_input, email, passwd):
      question=prompt_input
      ans = chat_gpt(prompt_input)
      # st.write(ans)
-     if (ans=='I don\'t know.' or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans  or ' I couldn\'t find'  in ans  ):
+     try:
+       if (ans=='I don\'t know.' or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans  or ' I couldn\'t find'  in ans  ):
            question=question0+ " Anupam Purwar"
-           ans=answer_question(question)
+           ans=chat_gpt(question)
            if (ans=='I don\'t know.'  or ans=='I don\'t know' or ans== 'I could not find an answer.' or 'I could not find' in ans or ' I couldn\'t find'  in ans  ):
              question=question0+ " Anupam"
-             ans=answer_question(question)
+             ans=chat_gpt(question)
              if (ans=='I don\'t know.'  or ans=='I don\'t know'  or ans== 'I could not find an answer.' or 'I could not find' in ans or ' I couldn\'t find'  in ans  ):
                question=question0+ " Anupam Purwar ISB"
-               ans=answer_question(question)
+               ans=chat_gpt(question)
+     except:
+          ans='Sorry, I could not find this about Anupam !!'
      return ans
 
 # User-provided prompt
